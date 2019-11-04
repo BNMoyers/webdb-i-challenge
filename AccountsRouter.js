@@ -50,6 +50,18 @@ router.get('/:id', (req, res)=> {
 
 //update
 
+router.put('/:id', (req, res) => {
+    const accountID = req.params.id;
+    const update = req.body;
+
+    db('accounts')
+        .where({ id: accountID })
+        .update(update)
+        .then( account => res.status(200).json('account updated'))
+        .catch(err => res.status(500).json(err))
+})
+
 //delete
+
 
 module.exports = router
