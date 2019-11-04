@@ -63,5 +63,13 @@ router.put('/:id', (req, res) => {
 
 //delete
 
+router.delete("/:id", (req, res) => {
+    const accountID = req.params.id;
+    db('accounts')
+    .where({ id: accountID })
+    .del()
+    .then(reply => res.status(200).json('account has been deleted'))
+    .catch(err => res.status(500).json(err))
+})
 
 module.exports = router
