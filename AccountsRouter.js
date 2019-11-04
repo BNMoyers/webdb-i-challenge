@@ -1,7 +1,7 @@
 //imports and dependencies
 const express = require('express');
-const router = express.Router;
 const db = require('./data/dbConfig');
+const router = express.Router();
 
 //requests
 
@@ -22,6 +22,16 @@ router
 
 //read
 
+router.get('/', (req, res) =>{
+    db('accounts')
+    .then(accounts => {
+        res.status(200).json(accounts)
+    })
+    .catch(err => {
+        res.status(500).json(err)
+    })
+})
+
 router.get('/:id', (req, res)=> {
     db('accounts')
     .select()
@@ -41,3 +51,5 @@ router.get('/:id', (req, res)=> {
 //update
 
 //delete
+
+module.exports = router
